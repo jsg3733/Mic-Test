@@ -8,5 +8,7 @@
     <string name="RecordButton">Record</string>
     <string name="StopButton">Stop</string>
     <string name="title_activity_main_activity2">MainActivity2</string>
+    <string name="btnMusic">Play MP3</string>
+    <string name="StopMusic">Stop</string>
 
 </resources>

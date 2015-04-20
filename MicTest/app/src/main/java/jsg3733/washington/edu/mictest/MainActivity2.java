@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 
 public class MainActivity2 extends ActionBarActivity {
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +25,29 @@ public class MainActivity2 extends ActionBarActivity {
         soundClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer mp = MediaPlayer.create(MainActivity2.this, Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()
+                mp = MediaPlayer.create(MainActivity2.this, Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()
                         + "/myaudio.3gp"));
                 mp.start();
             }
         });
+
+        Button playMP3 = (Button) findViewById(R.id.btnMusic);
+        playMP3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp =  MediaPlayer.create(MainActivity2.this, R.raw.test);
+                mp.start();
+            }
+        });
+
+        Button stopMusic = (Button) findViewById(R.id.btnStopMusic);
+        stopMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.stop();
+            }
+        });
+
     }
 
 

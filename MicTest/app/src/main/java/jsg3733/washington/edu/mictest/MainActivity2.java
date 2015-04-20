@@ -20,6 +20,7 @@ public class MainActivity2 extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity2);
+        mp =new MediaPlayer();
 
         ImageView soundClick = (ImageView) findViewById(R.id.imgSound);
         soundClick.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +29,8 @@ public class MainActivity2 extends ActionBarActivity {
                 mp = MediaPlayer.create(MainActivity2.this, Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()
                         + "/myaudio.3gp"));
                 mp.start();
+                SoundtrackPlayerListener Music = new SoundtrackPlayerListener();
+                Music.onCompletion(mp);
             }
         });
 
@@ -37,6 +40,8 @@ public class MainActivity2 extends ActionBarActivity {
             public void onClick(View v) {
                 mp =  MediaPlayer.create(MainActivity2.this, R.raw.test);
                 mp.start();
+                SoundtrackPlayerListener Music = new SoundtrackPlayerListener();
+                Music.onCompletion(mp);
             }
         });
 
@@ -45,9 +50,34 @@ public class MainActivity2 extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 mp.stop();
+                mp.reset();
             }
         });
 
+        /*mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+                finish();
+                //mp.stop();
+                //mp.reset();
+            }
+        });*/
+
+    }
+
+    private class SoundtrackPlayerListener implements MediaPlayer.OnCompletionListener{
+
+        public void onCompletion(MediaPlayer mp) {
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mp.stop();
+                    mp.reset();
+                    //finish();
+                }
+            });
+        }
     }
 
 
